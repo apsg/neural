@@ -68,7 +68,7 @@ class Matrix extends MatrixBase implements \ArrayAccess{
 
 	public function offsetSet($offset, $value) 
 	{ 
-
+		// Unable to implement since MatrixBase has private properties
 	} 
 
 	public function offsetGet($offset) 
@@ -78,7 +78,7 @@ class Matrix extends MatrixBase implements \ArrayAccess{
 
 	public function offsetUnset($offset) 
 	{ 
-
+		// Unable to implement since MatrixBase has private properties
 	} 
 
 }

@@ -1,0 +1,14 @@
+{
+    "name": "gacek/neural",
+    "description": "Neural network implementation",
+    "type": "library",
+    "require": {
+        "php-ai/php-ml": "^0.6.2"
+    },
+    "authors": [
+        {
+            "name": "Szymon Gackowski",
+            "email": "gacek@pasterzdrzew.pl"
+        }
+    ]
+}

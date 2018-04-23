@@ -10,5 +10,17 @@
             "name": "Szymon Gackowski",
             "email": "gacek@pasterzdrzew.pl"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gacek\\Neural\\NeuralServiceProvider"
+            ]
+        }
+    }
 }

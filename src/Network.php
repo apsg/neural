@@ -6,6 +6,9 @@ use Gacek\Neural\Interfaces\Activation;
 use Gacek\Neural\Activations\Sigmoid;
 use Gacek\Neural\Exceptions\NeuralNetworkException;
 
+/**
+ * Simple 3-layer neural network
+ */
 class Network{
 
 	/**
@@ -96,7 +99,12 @@ class Network{
 		$this->learning_rate = $rate;
 	}
 
-	public function predict(array $input_array) 
+	/**
+	 * Compute output based on provided input array
+	 * @param  array  $input_array Inputs
+	 * @return array               Outputs
+	 */
+	public function predict(array $input_array): array
 	{
 		if(count($input_array) != $this->iN){
 			throw new NeuralNetworkException('Array passed for prediction has wrong number of arguments.');
@@ -118,5 +126,10 @@ class Network{
 
 	    return $output->vectorize();
 	  }
+
+
+	public function train($inputs, $targets){
+		// TODO
+	}
 
 }

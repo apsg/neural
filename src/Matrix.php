@@ -17,7 +17,7 @@ class Matrix extends MatrixBase implements \ArrayAccess{
 	public static function zeros($rows, $columns): self
 	{
 		$fill = array_fill(0, $rows, array_fill(0, $columns, 0));
-		return new self($fill);
+		return new static($fill);
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Matrix extends MatrixBase implements \ArrayAccess{
 			}
 		}
 
-		return new self($fill);
+		return new static($fill);
 	}
 
 	/**
@@ -75,7 +75,32 @@ class Matrix extends MatrixBase implements \ArrayAccess{
             }
         }
 
-        return new self($mapped);
+        return new static($mapped);
+	}
+
+	/**
+	 * Convert one row/column matrix to single level array
+	 * @return array $vector
+	 */
+	public function vectorize(): array
+	{
+
+		if( $this->getColumns() !=1 && $this->getRows() != 1){
+			throw new \Exception('This matrix is not vectorizable');
+		}
+
+		$vector = [];
+
+		for($i = 0; $i < $this->getColumns(); $i++){
+			for($j=0; $j < $this->getRows(); $j++){
+				$vector[] = $this[$j][$i];
+			}
+		}
+		return $vector;
+	}
+	// Alias
+	public function toVector(){
+		return $this->vectorize();
 	}
 
 	// ------------------ ArrayAccess methods ----------------------

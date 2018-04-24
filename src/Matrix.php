@@ -3,6 +3,7 @@
 namespace Gacek\Neural;
 
 use Phpml\Math\Matrix as MatrixBase;
+use Gacek\Neural\Interfaces\Activation;
 
 class Matrix extends MatrixBase implements \ArrayAccess{
 	
@@ -53,10 +54,28 @@ class Matrix extends MatrixBase implements \ArrayAccess{
 	 * @param  integer $mul     [description]
 	 * @return [type]           [description]
 	 */
-	protected static function rand_float($st_num=0,$end_num=1,$mul=1000000)
+	protected static function rand_float($st_num=0,$end_num=1,$mul=1000000): float
 	{
 		if ($st_num>$end_num) return false;
 		return mt_rand($st_num*$mul,$end_num*$mul)/$mul;
+	}
+
+	/**
+	 * Use callable function on each element of the matrix.
+	 * @param  callable $function [description]
+	 * @return [type]             [description]
+	 */
+	public function map(callable $function): self
+	{
+		$mapped = $this->toArray();
+
+		for ($i = 0; $i < count($mapped); $i++) {
+            for ($j = 0; $j < count($mapped[0]); $j++) {
+            	$mapped[$i][$j] = $function($mapped[$i][$j]);
+            }
+        }
+
+        return new self($mapped);
 	}
 
 	// ------------------ ArrayAccess methods ----------------------

@@ -96,27 +96,27 @@ class Network{
 		$this->learning_rate = $rate;
 	}
 
-	public function predict(array $input_array): array 
+	public function predict(array $input_array) 
 	{
 		if(count($input_array) != $this->iN){
 			throw new NeuralNetworkException('Array passed for prediction has wrong number of arguments.');
 		}
 
-		// $inputs = Matrix::fromFlatArray($input_array);
+		$inputs = Matrix::fromFlatArray($input_array);
 
-		// $hidden = $this->weights_ih->multiply($inputs);
-		// $hidden->add($this->bias_h);
+		$hidden = $this->weights_ih->multiply($inputs)
+			->add($this->bias_h);
 
-	 //    // activation function!
-	 //    hidden.map(this.activation_function.func);
+		// Dealing with self-s
+		$hidden = (new Matrix($hidden->toArray()))->map([$this->activation, 'f']);
 
-	 //    // Generating the output's output!
-	 //    let output = Matrix.multiply(this.weights_ho, hidden);
-	 //    output.add(this.bias_o);
-	 //    output.map(this.activation_function.func);
+		$output = $this->weights_ho->multiply($hidden)
+			->add($this->bias_o);
 
-	 //    // Sending back to the caller!
-	 //    return output.toArray();
+		// Dealing with self-s
+		$output = (new Matrix($output->toArray()))->map([$this->activation, 'f']);
+
+	    return $output->vectorize();
 	  }
 
 }

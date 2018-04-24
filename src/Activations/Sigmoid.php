@@ -4,7 +4,7 @@ namespace Gacek\Neural\Activations;
 
 use Gacek\Neural\Interfaces\Activation;
 
-class Sigmoid implemets Activation{
+class Sigmoid implements Activation{
 	
 	public function f($v){
 		return 1 / (1 + exp(-$v));
